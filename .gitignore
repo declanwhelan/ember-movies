@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 node_modules/*
 .DS_Store
+=======
+coffee/tmp
+node_modules
+>>>>>>> 4c31c019b9a21290b53d488f3c3946729760e552

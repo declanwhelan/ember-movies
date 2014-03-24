@@ -23,20 +23,21 @@ module.exports = (grunt)->
     #   ]
     #   tasks: ['coffee','emberTemplates','concat','uglify']
     
-    # concat: 
-    #   basic: 
-    #    src: ['js/tmp/handlebars.js','js/tmp/coffee.js']
-    #    dest: 'coffee/app.js'
+    concat: 
+      basic:
+        files:
+          'coffee/tmp/vendor.js':  ['coffee/vendor/ember-1.4.0.js','coffee/vendor/handlebars-1.1.2.js','coffee/vendor/jquery-1.10.2.js']
+          'coffee/app.js': ['coffee/tmp/vendor.js','coffee/tmp/src.js']
     
-    # uglify:
-    #   options:
-    #     banner: "/*! <%= pkg.name %> <%= grunt.template.today(\"yyyy-mm-dd\") %> */\n"
+    uglify:
+      options:
+        banner: "/*! <%= pkg.name %> <%= grunt.template.today(\"yyyy-mm-dd\") %> */\n"
 
-    #   build:
-    #     src: "js/app.js"
-    #     dest: "js/app.min.js"
+      build:
+        src: "coffee/app.js"
+        dest: "coffee/app.min.js"
     
-    # clean: ['js/tmp/']
+    clean: ['coffee/tmp/']
  
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
@@ -47,5 +48,5 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-contrib-clean'
  
-  grunt.task.registerTask('build', ['coffee']);
+  grunt.task.registerTask('build', ['coffee','concat','uglify','clean']);
   grunt.registerTask 'default', ['watch']
